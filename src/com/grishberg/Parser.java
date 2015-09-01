@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by g on 01.09.15.
  */
 public class Parser {
-    public static String format(String input) {
+    public static Map<String, Object> format(String input) {
         String out = "";
         input = normalizeString(input);
         try {
@@ -17,7 +17,18 @@ public class Parser {
             input = input.replaceAll(reg, "");
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Map<String, Object> javaRootMapObject = gson.fromJson(input, Map.class);
-            out = gson.toJson(javaRootMapObject);
+            return javaRootMapObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String prettyPrint(Map<String, Object> map){
+        String out = "";
+        try {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            out = gson.toJson(map);
         } catch (Exception e) {
             e.printStackTrace();
         }

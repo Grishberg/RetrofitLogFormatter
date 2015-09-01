@@ -12,6 +12,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TreeView?>
 <BorderPane styleClass="root" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sample.Controller">
@@ -23,20 +24,24 @@
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                 </padding>
                 -->
-                <TextArea fx:id="taInput" GridPane.columnIndex="0"
+                <TextArea fx:id="taInput"
+                          GridPane.columnIndex="0"
                            GridPane.columnSpan="1"
                            GridPane.hgrow="ALWAYS"
                            GridPane.rowIndex="0"
                            GridPane.vgrow="ALWAYS">
                 </TextArea>
-                <!--
-                <TextArea fx:id="taOutput" GridPane.columnIndex="0"
+
+
+
+                <TreeView fx:id="tvOutput"
+                          GridPane.columnIndex="1"
                           GridPane.columnSpan="1"
                           GridPane.hgrow="ALWAYS"
-                          GridPane.rowIndex="1"
+                          GridPane.rowIndex="0"
                           GridPane.vgrow="ALWAYS">
-                </TextArea>
-                -->
+                </TreeView>
+
                 <Button fx:id="btnGenetate"
                         onAction="#onFormatClicked"
                         text="format"
