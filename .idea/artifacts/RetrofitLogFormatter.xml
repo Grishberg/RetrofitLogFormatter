@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="JavaFXApp">
-    <output-path>$PROJECT_DIR$/out/artifacts/JavaFXApp</output-path>
+  <artifact type="javafx" name="RetrofitLogFormatter">
+    <output-path>$PROJECT_DIR$/out/artifacts/RetrofitLogFormatter</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="sample.Main" />
@@ -9,6 +9,9 @@
     <root id="root">
       <element id="archive" name="JavaFXApp.jar">
         <element id="module-output" name="RetrofitLogParser" />
+        <element id="directory" name="out">
+          <element id="library" level="project" name="com.google.code.gson:gson:2.3.1" />
+        </element>
       </element>
     </root>
   </artifact>
