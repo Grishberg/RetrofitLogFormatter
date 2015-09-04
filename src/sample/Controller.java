@@ -50,7 +50,7 @@ public class Controller implements Initializable {
             if (set.getValue() instanceof Map) {
                 node = new TreeItem<>();
                 node.setExpanded(true);
-                node.setValue(set.getKey());
+                node.setValue(String.format("\"%s\"", set.getKey()));
                 List<TreeItem<String>> subnodes = walk((Map) set.getValue());
                 for (TreeItem<String> subnode : subnodes) {
                     node.getChildren().add(subnode);
@@ -66,54 +66,72 @@ public class Controller implements Initializable {
     }
 
     private TreeItem<String> getNode(String key, Object value) {
-        TreeItem<String> node = new TreeItem<>();
-        node.setExpanded(true);
+        TreeItem<String> node = null;
         if (value instanceof String) {
+            node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : \"%s\"", key, value));
         } else if (value instanceof Long) {
+            node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : %d", key, value));
         } else if (value instanceof Double) {
+            node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : %f", key, value));
         } else if (value instanceof Boolean){
+            node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : %b", key, value));
         } else if (value instanceof List) {
+            node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : [ ", key));
             for (Object val : (List) value) {
                 TreeItem<String> subnode = getArrayNode(key, val);
-                node.getChildren().add(subnode);
+                if(subnode != null) {
+                    subnode.setExpanded(true);
+                    node.getChildren().add(subnode);
+                }
             }
             TreeItem<String> n = new TreeItem<>();
             n.setValue("]");
             node.getChildren().add(n);
         }
+        if(node != null){
+            node.setExpanded(true);
+        }
         return node;
     }
 
     private TreeItem<String> getArrayNode(String parenName, Object value) {
-        TreeItem<String> node = new TreeItem<>();
-        node.setExpanded(true);
+        TreeItem<String> node = null;
         if (value instanceof String) {
+            node = new TreeItem<>();
             node.setValue(String.format("\"%s\"", value));
         } else if (value instanceof Integer) {
+            node = new TreeItem<>();
             node.setValue(String.format("%d", value));
         } else if (value instanceof Float) {
+            node = new TreeItem<>();
             node.setValue(String.format("%f", value));
         }else if (value instanceof Double) {
+            node = new TreeItem<>();
             node.setValue(String.format("%f", value));
         } else if (value instanceof Boolean){
+            node = new TreeItem<>();
             node.setValue(String.format("%b", value));
         } else if (value instanceof List) {
+            node = new TreeItem<>();
             node.setValue(String.format(" [ "));
             for (Object val : (List) value) {
-                TreeItem<String> subnode = getArrayNode("",val);
+                TreeItem<String> subnode = getArrayNode("", val);
                 node.getChildren().add(subnode);
             }
         } else if (value instanceof Map){
+            node = new TreeItem<>();
             node.setValue(parenName +" item");
             List<TreeItem<String>> subnodes = walk((Map<String, Object>)value);
             for (TreeItem<String> subnode : subnodes) {
                 node.getChildren().add(subnode);
             }
+        } else {
+            System.out.println("unknown type "+value);
         }
         return node;
     }
