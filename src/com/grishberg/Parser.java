@@ -13,7 +13,8 @@ public class Parser {
         String out = "";
         input = normalizeString(input);
         try {
-            String reg = "(\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\.\\d{0,4}\\s*\\d{1,8}-\\d{1,8}\\/info.goodline\\.btv\\.dev D\\/Retrofit﹕\\s)";
+            //String reg = "(\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\.\\d{0,4}\\s*\\d{1,8}-\\d{1,8}\\/info.goodline\\.btv\\.dev D\\/Retrofit﹕\\s)";
+            String reg = "(\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\.\\d{0,4}\\s*\\d{1,8}-\\d{1,8}\\/\\S* D\\/Retrofit﹕\\s)";
             input = input.replaceAll(reg, "");
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Map<String, Object> javaRootMapObject = gson.fromJson(input, Map.class);
