@@ -72,14 +72,14 @@ public class Controller implements Initializable {
             node.setValue(String.format("\"%s\" : \"%s\"", key, value));
         } else if (value instanceof Long) {
             node.setValue(String.format("\"%s\" : %d", key, value));
-        } else if (value instanceof Float) {
-            node.setValue(String.format("\"%s\" : %f", key, value));
         } else if (value instanceof Double) {
             node.setValue(String.format("\"%s\" : %f", key, value));
+        } else if (value instanceof Boolean){
+            node.setValue(String.format("\"%s\" : %b", key, value));
         } else if (value instanceof List) {
             node.setValue(String.format("\"%s\" : [ ", key));
             for (Object val : (List) value) {
-                TreeItem<String> subnode = getNode(val);
+                TreeItem<String> subnode = getArrayNode(key, val);
                 node.getChildren().add(subnode);
             }
             TreeItem<String> n = new TreeItem<>();
@@ -89,7 +89,7 @@ public class Controller implements Initializable {
         return node;
     }
 
-    private TreeItem<String> getNode(Object value) {
+    private TreeItem<String> getArrayNode(String parenName, Object value) {
         TreeItem<String> node = new TreeItem<>();
         node.setExpanded(true);
         if (value instanceof String) {
@@ -100,10 +100,18 @@ public class Controller implements Initializable {
             node.setValue(String.format("%f", value));
         }else if (value instanceof Double) {
             node.setValue(String.format("%f", value));
+        } else if (value instanceof Boolean){
+            node.setValue(String.format("%b", value));
         } else if (value instanceof List) {
             node.setValue(String.format(" [ "));
             for (Object val : (List) value) {
-                TreeItem<String> subnode = getNode(val);
+                TreeItem<String> subnode = getArrayNode("",val);
+                node.getChildren().add(subnode);
+            }
+        } else if (value instanceof Map){
+            node.setValue(parenName +" item");
+            List<TreeItem<String>> subnodes = walk((Map<String, Object>)value);
+            for (TreeItem<String> subnode : subnodes) {
                 node.getChildren().add(subnode);
             }
         }

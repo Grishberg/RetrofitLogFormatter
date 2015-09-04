@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("retrofit log formatter");
+        primaryStage.setTitle("retrofit log formatter? created by Grigoriy Rylov");
         primaryStage.setScene(new Scene(root, 640, 340));
         primaryStage.show();
     }
