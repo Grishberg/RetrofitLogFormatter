@@ -99,7 +99,7 @@ public class Controller implements Initializable {
         return node;
     }
 
-    private TreeItem<String> getArrayNode(String parenName, Object value) {
+    private TreeItem<String> getArrayNode(String parentName, Object value) {
         TreeItem<String> node = null;
         if (value instanceof String) {
             node = new TreeItem<>();
@@ -125,7 +125,7 @@ public class Controller implements Initializable {
             }
         } else if (value instanceof Map){
             node = new TreeItem<>();
-            node.setValue(parenName +" item");
+            node.setValue(parentName +" item");
             List<TreeItem<String>> subnodes = walk((Map<String, Object>)value);
             for (TreeItem<String> subnode : subnodes) {
                 node.getChildren().add(subnode);
