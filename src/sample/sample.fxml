@@ -35,6 +35,7 @@
 
 
                 <TreeView fx:id="tvOutput"
+                          visible="false"
                           GridPane.columnIndex="1"
                           GridPane.columnSpan="1"
                           GridPane.hgrow="ALWAYS"
