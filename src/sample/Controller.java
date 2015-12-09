@@ -30,6 +30,10 @@ public class Controller implements Initializable {
         String input = taInput.getText();
         Map<String, Object> map = Parser.format(input);
         String output = Parser.prettyPrint(map);
+        if(output == null){
+            System.out.println("output is null");
+            return;
+        }
 
         TreeItem<String> rootNode =
                 new TreeItem<String>("response");
