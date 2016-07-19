@@ -40,6 +40,8 @@ public class Controller implements Initializable {
             rootNode.getChildren().add(subnode);
         }
         tvOutput.setRoot(rootNode);
+        tvOutput.setShowRoot(true);
+        tvOutput.setVisible(true);
         taInput.setText(output);
     }
 
@@ -76,7 +78,7 @@ public class Controller implements Initializable {
         } else if (value instanceof Double) {
             node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : %f", key, value));
-        } else if (value instanceof Boolean){
+        } else if (value instanceof Boolean) {
             node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : %b", key, value));
         } else if (value instanceof List) {
@@ -84,7 +86,7 @@ public class Controller implements Initializable {
             node.setValue(String.format("\"%s\" : [ ", key));
             for (Object val : (List) value) {
                 TreeItem<String> subnode = getArrayNode(key, val);
-                if(subnode != null) {
+                if (subnode != null) {
                     subnode.setExpanded(true);
                     node.getChildren().add(subnode);
                 }
@@ -93,7 +95,7 @@ public class Controller implements Initializable {
             n.setValue("]");
             node.getChildren().add(n);
         }
-        if(node != null){
+        if (node != null) {
             node.setExpanded(true);
         }
         return node;
@@ -110,10 +112,10 @@ public class Controller implements Initializable {
         } else if (value instanceof Float) {
             node = new TreeItem<>();
             node.setValue(String.format("%f", value));
-        }else if (value instanceof Double) {
+        } else if (value instanceof Double) {
             node = new TreeItem<>();
             node.setValue(String.format("%f", value));
-        } else if (value instanceof Boolean){
+        } else if (value instanceof Boolean) {
             node = new TreeItem<>();
             node.setValue(String.format("%b", value));
         } else if (value instanceof List) {
@@ -123,15 +125,15 @@ public class Controller implements Initializable {
                 TreeItem<String> subnode = getArrayNode("", val);
                 node.getChildren().add(subnode);
             }
-        } else if (value instanceof Map){
+        } else if (value instanceof Map) {
             node = new TreeItem<>();
-            node.setValue(parentName +" item");
-            List<TreeItem<String>> subnodes = walk((Map<String, Object>)value);
+            node.setValue(parentName + " item");
+            List<TreeItem<String>> subnodes = walk((Map<String, Object>) value);
             for (TreeItem<String> subnode : subnodes) {
                 node.getChildren().add(subnode);
             }
         } else {
-            System.out.println("unknown type "+value);
+            System.out.println("unknown type " + value);
         }
         return node;
     }
