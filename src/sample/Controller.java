@@ -72,6 +72,9 @@ public class Controller implements Initializable {
         if (value instanceof String) {
             node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : \"%s\"", key, value));
+        } else if (value instanceof Integer) {
+            node = new TreeItem<>();
+            node.setValue(String.format("\"%s\" : %d", key, value));
         } else if (value instanceof Long) {
             node = new TreeItem<>();
             node.setValue(String.format("\"%s\" : %d", key, value));
